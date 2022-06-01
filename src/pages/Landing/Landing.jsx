@@ -1,3 +1,4 @@
+import { ListImage } from "apis/api";
 import { CardPokemon } from "components/CardPokemon/Card";
 import { WrapperListCard } from "components/CardPokemon/styled";
 
@@ -8,7 +9,14 @@ function Landing() {
   const [items, setItems] = useState(
     Array.from(Array(60).keys(), (n) => n + 1)
   );
+  const [back, setBack] = useState(false);
   const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setBack(!back);
+    }, 3000);
+  }, [back]);
+
   const fetchMoreListItems = () => {
     setTimeout(() => {
       setItems((prevState) => [
@@ -32,12 +40,11 @@ function Landing() {
           return (
             <CardPokemon
               isLoading={loading}
-              urlIconMini={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${val}.gif`}
+              urlSticker={ListImage.API_IMAGE_SVG(val)}
+              urlIconMini={ListImage.API_IMAGE_GIF(val, back)}
               no={val}
               key={val}
-            >
-              Pokemon {val}
-            </CardPokemon>
+            ></CardPokemon>
           );
         })}
       </WrapperListCard>

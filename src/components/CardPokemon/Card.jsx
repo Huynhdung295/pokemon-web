@@ -4,12 +4,13 @@ import {
   WrapperCardPokemon,
   PokemonAnimated,
   PokemonNO,
+  MainPokemon,
 } from "./styled";
 import ProptyTypes from "prop-types";
 import { LazyCard } from "components/Loading/styled";
 
-const CardPokemon = ({ children, isLoading, urlIconMini, no }) => {
-  const skeleton = <LazyCard variant="rectangular" height={150} />;
+const CardPokemon = ({ children, isLoading, urlIconMini, urlSticker, no }) => {
+  const skeleton = <LazyCard variant="rectangular" height={250} />;
   const skeletonIcon = (
     <LazyCard icon="true" variant="circular" height={50} width={50} />
   );
@@ -26,6 +27,7 @@ const CardPokemon = ({ children, isLoading, urlIconMini, no }) => {
         <>
           <ActionArea children={children} />
           <PokemonNO>{no}</PokemonNO>
+          <MainPokemon src={urlSticker} alt=""/>
           <PokemonAnimated src={urlIconMini} alt="" />
         </>
       )}
@@ -38,6 +40,7 @@ CardPokemon.propTypes = {
   children: ProptyTypes.node,
   isLoading: ProptyTypes.bool,
   urlIconMini: ProptyTypes.string,
+  urlSticker: ProptyTypes.string,
   no: ProptyTypes.number,
 };
 CardPokemon.defaultProps = {
@@ -45,4 +48,5 @@ CardPokemon.defaultProps = {
   isLoading: true,
   urlIconMini: "",
   no: 0,
+  urlSticker: "",
 };
